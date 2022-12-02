@@ -7,7 +7,11 @@ for key in /keystore/validator_keys/*; do
   if [ -f "$key" ]; then
     echo "Found validator key in $key"
     echo "Importing validator..."
-    ./lighthouse account validator import --network $VAL_NETWORK --password-file /keystore/keystore_password.txt --keystore $key --reuse-password --datadir /data
+    if [ $VAL_NETWORK = "CUSTOM" ]; then
+      ./lighthouse account validator import --testnet-dir /testnet-dir --password-file /keystore/keystore_password.txt --keystore $key --reuse-password --datadir /data  
+    else
+      ./lighthouse account validator import --network $VAL_NETWORK --password-file /keystore/keystore_password.txt --keystore $key --reuse-password --datadir /data
+    fi
     echo "Validator imported"
   fi
 done
