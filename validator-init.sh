@@ -19,6 +19,6 @@ done
 if [ -f "$SLASHING_DATA_FILE" ]; then
   echo "Found slashing interchange data in $SLASHING_DATA_FILE"
   echo "Importing slashing data..."
-  ./lighthouse account validator slashing-protection import $SLASHING_DATA_FILE
+  ./lighthouse account validator slashing-protection import --datadir /data $SLASHING_DATA_FILE
   echo "Slashing data imported"
 fi
