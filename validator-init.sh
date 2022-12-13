@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-SLASHING_DATA_FILE=$1
-
 for key in /keystore/validator_keys/*; do
   if [ -f "$key" ]; then
     echo "Found validator key in $key"
@@ -15,10 +13,3 @@ for key in /keystore/validator_keys/*; do
     echo "Validator imported"
   fi
 done
-
-if [ -f "$SLASHING_DATA_FILE" ]; then
-  echo "Found slashing interchange data in $SLASHING_DATA_FILE"
-  echo "Importing slashing data..."
-  ./lighthouse account validator slashing-protection import --datadir /data $SLASHING_DATA_FILE
-  echo "Slashing data imported"
-fi
